@@ -138,14 +138,20 @@ Ahora que nuestro servicio está arriba se puede enviar input de entrada. El for
 ```
 ```json
 {
-    "container": "mex-landing-iba-chu-mc3-tm-coilbox",
-    "input": {
-            "focus_on": [
-            "20210801"
-        ], 
-        "constrains": "None", 
-        "total_files" : "True"
-    }
+    "input_data": [
+        {
+            "container": "mex-landing-iba-chu-mc3-tm-coilbox", 
+            "input": {
+                "focus_on": ["20210801"], 
+                "constrains": "None", 
+                "total_files": "True"
+            },
+            "cols_needed_init": "0", 
+            "cols_needed_end": "10",
+            "parquets_needed_init": "0",
+            "parquets_needed_end": "5"
+        }
+    ]
 }
 ```
 # Resultados
