@@ -67,7 +67,7 @@ STORAGE_CONTAINER_PATH_NAME_ANA_PARQ = "analizador_parquet_{}".format(time)
 ```
 Se dejó en formato *py* para que se pueda ejecutar algunas instrucciones sin necesidad de agregarlo directamente a la API, como se puede observar, se deja un apartado date, el cual al tener este archivo de configuración en Python, este solo toma la información generada por este proceso. Se pensó así por practicidad.
 
-#Manifiesto AKS
+# Manifiesto AKS
 Los manifiestos para este despliegue son 2:
 - ***secrets_validador_contenedor.yaml:*** Este primer manifiesto, contiene el nombre nombres de la cuenta de entrada, salida, y nombre de la cuenta para acceso a Azure (archivo de configuración) también cuenta con las llaves para cada una de las cuentas mencionadas.
 - ***kubernetes_validador_contenedores.yaml:*** Este manifiesto sirve para realizar el deploy en aks, aquí se configura de donde se tomará la imagen, el puerto al cual se expondrá la imagen, el nombre de las cuentas y como se tomaran para que se lean del archivo “secrets”. Hay que tener en cuenta un par de puntos a configurar dentro de este archivo. 
@@ -114,13 +114,14 @@ spec:
     targetPort: 4000
 ```
 
-#Servicio AKS
+# Servicio AKS
 Una vez que se configuró cada uno de los manifiestos necesarios para el AKS. Se deberá de levantar el servicio con los siguientes comandos:
 ```shell
 kubectl.exe apply -f .\secrets_validador_contenedor.yaml  
 kubectl.exe apply -f .\kubernetes_validador_contenedores.yaml
 ```
 Si revisamos el log de este servicio, veremos que se ha levantado correctamente, y que estará en espera para recibir una petición:
+
      * Serving Flask app 'main' (lazy loading)
      * Environment: production
        WARNING: This is a development server. Do not use it in a production deployment.
@@ -130,7 +131,7 @@ Si revisamos el log de este servicio, veremos que se ha levantado correctamente,
        WARNING: This is a development server. Do not use it in a production deployment.
      * Running on http://172.17.0.5:4000/ (Press CTRL+C to quit)
 
-#Input
+# Input
 Ahora que nuestro servicio está arriba se puede enviar input de entrada. El formato y la dirección es la siguiente:
 ```sh
   curl http://localhost:port/validador_contendores/input
@@ -147,7 +148,7 @@ Ahora que nuestro servicio está arriba se puede enviar input de entrada. El for
     }
 }
 ```
-#Resultados
+# Resultados
 La API responderá, y el proceso se ejecutará en el AKS, para poder ver el proceso, hay que ver el “log” del AKS:
 ```json
 {
