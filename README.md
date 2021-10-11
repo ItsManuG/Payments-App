@@ -32,19 +32,23 @@ El archivo de configuración se aloja en Azure, este se almacena en un *fileshar
 import datetime
 import os
 
+# Keys to read Input 
 account = os.getenv("ACCOUNT_NAME_INPUT") 
+account_key = os.getenv("ACCOUNT_KEY_INPUT") 
 domain = "@{}.blob.core.windows.net".format(account)
 account_name = "https://{}.blob.core.windows.net".format(account)
-account_key = os.getenv("ACCOUNT_KEY_INPUT") 
 
-#
-COLS_NEEDED_INIT = 0
-COLS_NEEDED_END = 10
+# petition keys
+PETITION_DATA_KEYS = [
+    'container', 
+    'input', 
+    'cols_needed_init', 
+    'cols_needed_end', 
+    'parquets_needed_init', 
+    'parquets_needed_end'
+]
 
-PARQUETS_NEEDED_INIT = 0
-PARQUETS_NEEDED_END = 5
-
-#
+# Output
 date = datetime.datetime.strftime(datetime.datetime.now(), "%Y%m%d")
 time = datetime.datetime.strftime(datetime.datetime.now(), "%H-%M-%S")
 
@@ -53,16 +57,16 @@ ACCOUNT_KEY_OUTPUT = os.getenv("ACCOUNT_KEY_OUTPUT")
 
 STORAGE_CONTAINER_OUTPUT = "validacion-contenedores"
 
-STORAGE_CONTAINER_PATH_VER_CONT = "verificador_contenedores/date={}/validador_contenedores".format(date) 
+STORAGE_CONTAINER_PATH_VER_CONT = "date={}/validador_contenedores".format(date) 
 STORAGE_CONTAINER_PATH_NAME_VER_CONT = "validador_contenedores_{}".format(time)
 
-STORAGE_CONTAINER_PATH_EXT_COLS = "verificador_contenedores/date={}/extractor_columnas".format(date)
+STORAGE_CONTAINER_PATH_EXT_COLS = "date={}/extractor_columnas".format(date)
 STORAGE_CONTAINER_PATH_NAME_EXT_COLS = "extractor_columnas_{}".format(time)
 
-STORAGE_CONTAINER_PATH_MAT_COLS = "verificador_contenedores/date={}/match_columnas".format(date)
+STORAGE_CONTAINER_PATH_MAT_COLS = "date={}/match_columnas".format(date)
 STORAGE_CONTAINER_PATH_NAME_MAT_COLS = "match_columnas_{}".format(time)
 
-STORAGE_CONTAINER_PATH_ANA_PARQ = "verificador_contenedores/date={}/analizador_parquet".format(date)
+STORAGE_CONTAINER_PATH_ANA_PARQ = "date={}/analizador_parquet".format(date)
 STORAGE_CONTAINER_PATH_NAME_ANA_PARQ = "analizador_parquet_{}".format(time)
 ```
 Se dejó en formato *py* para que se pueda ejecutar algunas instrucciones sin necesidad de agregarlo directamente a la API, como se puede observar, se deja un apartado date, el cual al tener este archivo de configuración en Python, este solo toma la información generada por este proceso. Se pensó así por practicidad.
